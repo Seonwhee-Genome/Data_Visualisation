@@ -16,3 +16,12 @@ grid.arrange(plot1, plot2, plot3, plot4, nrow=2, ncol=2)
 
 dir.create("./ggsave", showWarnings = F)
 ggsave("./ggsave/gapminder.png")
+
+#####################################################################33
+for(i in 1:length(unique(gapminder$country))){
+  gapminder %>% filter(country == gapminder$country[i]) %>%
+    ggplot(aes(x = year, y = lifeExp, color = country)) +
+    geom_line() + geom_point() +
+    ggsave(paste0("./ggsave/",gapminder$country[i],".png"))
+  # print(paste0(i," / ",length(unique(gapminder$country))))
+}
